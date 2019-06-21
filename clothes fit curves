@@ -1,0 +1,263 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jun 10 16:57:11 2019
+
+@author: caseydonahue
+"""
+
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.stats as stats
+import math
+import scipy.stats as st
+from scipy.stats import norm
+
+mu = 0
+sigma = 1
+
+#client info
+age = 43
+
+clientw = 160   #lbs
+clienth = 69    #in
+clientc = 85    #cm
+clients = 0   #cm
+clientm = 30    #cm
+clienta = 0    #cm
+clientl = 43    #cm
+
+print "Age ="
+print(age)
+
+#weight (lbs)
+if age>=20 and age<=29:
+    muw = 161.8
+    tenpercentw = 113.9
+if age>=30 and age<=39:
+    muw = 172.9
+    tenpercentw = 124.0
+if age>=40 and age<=49:
+    muw = 173.1
+    tenpercent = 124.8
+if age>=50 and age<=59:
+    muw = 174.4
+    tenpercent = 124.9
+if age>=60 and age<=69:
+    muw = 168.8
+    tenpercentw = 122.5
+if age>=70 and age<=79:
+    muw = 165.8
+    tenpercentw = 120.2
+if age>=80:
+    muw = 141.9
+    tenpercentw = 103.8
+if age == 0:
+    muw = 168.5
+    tenpercentw = 119.8
+sigmaw = ((muw - tenpercentw)/1.28)
+if clientw != 0:
+    zw = (clientw - muw)/sigmaw
+    percentilew = norm.cdf(clientw, loc=muw, scale=sigmaw)
+    print("weight percentile=")
+    print(percentilew)
+else:
+    zw = 0
+    print("weight percentile=")
+    print"client average used"
+#height (in)
+muh = 63.7
+tenpercenth = 60.1
+sigmah = ((muh - tenpercenth)/1.28)
+if clienth != 0:
+    zh = (clienth - muh)/sigmah
+    percentileh = norm.cdf(clienth, loc=muh, scale=sigmah)
+    print("height percentile=")
+    print(percentileh)
+else:
+    zh = 0
+    print("height percentile=")
+    print"client average used"
+#waist circumfrence (cm)
+if age>=20 and age<=29:
+    muc = 91
+    tenpercentc = 77.3
+if age>=30 and age<=39:
+    muc = 96
+    tenpercentc = 76.5
+if age>=40 and age<=49:
+    muc = 97.1
+    tenpercentc = 77.8
+if age>=50 and age<=59:
+    muc = 99.7
+    tenpercentc = 80.1
+if age>=60 and age<=69:
+    muc = 99.7
+    tenpercentc = 81.2
+if age>=70 and age<=79:
+    muc = 100.3
+    tenpercentc = 82.5
+if age>=80:
+    muc = 94.3
+    tenpercentc = 79.2
+if age == 0:
+    muc = 96.9
+    tenpercentc = 77.3
+sigmac = ((muc - tenpercentc)/1.28)
+if clientc != 0:
+    zc = (clientc - muc)/sigmac
+    percentilec = norm.cdf(clientc, loc=muc, scale=sigmac)
+    print("waist circumfrence percentile=")
+    print(percentilec)
+else:
+    zc = 0
+    print("waist circumfrence percentile=")
+    print"client average used"
+#sagital abdominal (cm)
+mus = 21.9
+tenpercents = 16.6
+sigmas = ((mus - tenpercents)/1.28)
+if clients != 0:
+    zs = (clients - mus)/sigmas
+    percentiles = norm.cdf(clients, loc=mus, scale=sigmas)
+    print("sagittal abdominal percentile=")
+    print(percentiles)
+else:
+    zs = 0
+    print("sagital abdominal percentile=")
+    print"client average used"
+#midarm circumfrence (cm)
+mum = 32.2
+tenpercentm = 25.9
+sigmam = ((mum - tenpercentm)/1.28)
+if clientm != 0:
+    zm = (clientm - mum)/sigmam
+    percentilem = norm.cdf(clientm, loc=mum, scale=sigmam)
+    print("midarm circumfrence percentile=")
+    print(percentilem)
+else:
+    zm = 0
+    print "midarm circumfrence percentile="
+    print "client average used"
+#upper arm length (cm)
+mua = 35.9
+tenpercenta = 33
+sigmaa = ((mua - tenpercenta)/1.28)
+if clienta != 0:
+    za = (clienta - mua)/sigmaa
+    percentilea = norm.cdf(clienta, loc=mua, scale=sigmaa)
+    print("upper arm length percentile=")
+    print(percentilea)
+else:
+    za = 0
+    print "upper arm length percentile="
+    print "client average used"
+#upper leg length (cm)
+if age>=20 and age<=29:
+    mul = 38.6
+    tenpercentl = 35.3
+if age>=30 and age<=39:
+    mul = 38.1
+    tenpercentl = 34.3
+if age>=40 and age<=49:
+    mul = 37.4
+    tenpercentl = 33.2
+if age>=50 and age<=59:
+    mul = 36.8
+    tenpercentl = 33
+if age>=60 and age<=69:
+    mul = 35.9
+    tenpercentl = 32.2
+if age>=70 and age<=79:
+    mul = 35.4
+    tenpercentl = 31.2
+if age>=80:
+    mul = 35
+    tenpercentl = 31.4
+if age == 0:
+    mul = 37.1
+    tenpercentl = 33.1
+sigmal = ((mul - tenpercentl)/1.28)
+if clientl != 0:
+    zl = (clientl - mul)/sigmal
+    percentilel = norm.cdf(clientl, loc=mul, scale=sigmal)
+    print("upper leg length percentile=")
+    print(percentilel)
+else:
+    zl = 0
+    print "upper leg length percentile="
+    print "client average used"
+
+     
+
+zarray = np.array([zw, zh, zc, zs, zm, za, zl]) 
+zavg = zarray[zarray!=0].mean() 
+print"Average z-score =" 
+print (round(zavg, 2))
+
+estpercentileavg = norm.cdf(zavg, 0, 1)
+print("average client percentile=")
+print(estpercentileavg)
+
+
+#use known data to get unknowns
+if clientw == 0:
+    estw = zavg*sigmaw + muw
+    print"weight (lbs) estimate ="
+    print(estw)
+if clienth == 0:
+    esth = zavg*sigmah + muh
+    print"height (in) estimate ="
+    print(esth)
+if clientc == 0:
+    estc = zavg*sigmac + muc
+    print"waist circumfrence (cm) estimate ="
+    print(estc)
+if clients == 0:
+    ests = zavg*sigmas + mus
+    print"sagittal abdominal (cm) estimate ="
+    print(ests)
+if clientm == 0:
+    estm = zavg*sigmam + mum
+    print"midarm circumfrence (cm) estimate ="
+    print(estm)
+if clienta == 0:
+    esta = zavg*sigmaa + mua
+    print"upper arm length (cm) estimate ="
+    print(esta)
+if clientl == 0:
+    estl = zavg*sigmal + mul
+    print"upper leg length (cm) estimate ="
+    print(estl)
+
+
+
+
+x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
+plt.plot(x, stats.norm.pdf(x, mu, sigma))
+if clientw != 0:
+    plt.plot(zw,stats.norm.pdf(zw, mu, sigma),'o', color='red')
+if clienth != 0:
+    plt.plot(zh,stats.norm.pdf(zh, mu, sigma),'o', color='cyan')
+if clientc != 0:
+    plt.plot(zc,stats.norm.pdf(zc, mu, sigma),'o', color='green')
+if clients != 0:
+    plt.plot(zs,stats.norm.pdf(zs, mu, sigma),'o', color='darkviolet')
+if clientm != 0:
+    plt.plot(zm,stats.norm.pdf(zm, mu, sigma),'o', color='orange')
+if clienta != 0:
+    plt.plot(za,stats.norm.pdf(za, mu, sigma),'o', color='yellow')
+if clientl != 0:
+    plt.plot(zl,stats.norm.pdf(zl, mu, sigma),'o', color='magenta')
+if clientw==0 or clienth==0 or clientc==0 or clients==0 or clientm==0 or clienta==0 or clientl==0:
+    plt.plot(zavg,stats.norm.pdf(zavg, mu, sigma),'o', color='black')
+plt.axvline(zavg, color='k', linestyle='dashed', linewidth=1)
+plt.show()
+
+
+
+
+
+
+
+
